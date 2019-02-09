@@ -5,6 +5,8 @@
     <title>ajax1</title>
 </head>
 <body>
+	<br><br>
+	<div id="text"></div>
 <button id="btn1">query</button>
 <script>
     document.getElementById('btn1').addEventListener("click",loadText);
@@ -15,11 +17,26 @@
 
         xhr.send();
 
+	/*
         xhr.onload=function () {
             console.log(this.responseText);
-
-        }
-
+			document.getElementById("text").innerHTML=this.responseText;
+		}
+		*/
+			
+		
+		xhr.onreadystatechange=function(){
+			if(this.status==200 && this.readyState==4)
+			{
+				document.getElementById("text").innerHTML=this.responseText;
+			}
+			else
+			{			
+				document.getElementById("text").innerHTML="网页不存在";
+			}
+		}
+			
+     
     }
 </script>
 
