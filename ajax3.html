@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax1</title>
+</head>
+<body>
+	<button id="btn1">请求github接口</button>
+	<br><br>
+	<h1>所有github的用户信息</h1>
+	<div id="users"></div>
+<script>
+    document.getElementById('btn1').addEventListener("click",loadUsers);
+    function loadUsers() {
+        var xhr=new XMLHttpRequest();
+       // console.log(xhr);
+        xhr.open('GET','https://api.github.com/users',true);
+
+        xhr.send();
+		
+		
+		xhr.onreadystatechange=function(){
+			if(this.status==200 && this.readyState==4)
+			{
+				console.log(this.responseText);
+				var users=JSON.parse(this.responseText);
+				console.log(users);
+	
+				var output='';
+				for(var i in users)
+					{
+						output+=
+							'<ul>'+
+								'<li>'+users[i].id+'</li>'+
+								'<li>'+users[i].login+'</li>'+
+							'</ul>';											
+					}
+				document.getElementById("users").innerHTML=output;
+		
+			}
+			else
+			{			
+				document.getElementById("text").innerHTML="网页不存在";
+			}
+		}			
+    }
+</script>
+
+</body>
+</html>
