@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax1</title>
+</head>
+<body>
+<button id="btn1">query</button>
+<script>
+    document.getElementById('btn1').addEventListener("click",loadText);
+    function loadText() {
+        var xhr=new XMLHttpRequest();
+       // console.log(xhr);
+        xhr.open('GET','a.txt',true);
+
+        xhr.send();
+
+        xhr.onload=function () {
+            console.log(this.responseText);
+
+        }
+
+    }
+</script>
+
+</body>
+</html>
